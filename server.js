@@ -29,7 +29,7 @@ app.get('/', function(req, res){
 
 //define todo Model  ===============================================================================
 
-var Todo = mongoose.model('todo', {
+var Todo = mongoose.model('Todo', {
 	text : String
 });
 
