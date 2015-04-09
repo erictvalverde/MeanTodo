@@ -6,7 +6,6 @@ meanTodo.controller('mainController', ['$scope', '$http', function($scope, $http
 	$scope.todos = [];
 	$scope.todoNumber = 0;
 
-
 	//When landing on the page get all todos as show them
 	$http.get('/api/todos')
 		.success(function(data){

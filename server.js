@@ -11,7 +11,7 @@ var express        = require('express'),
 
 //Mongoose configuration ===========================================================================
 
-mongoose.connect('mongodb://localhost:27017/mean-todo');        //Connecting to local mondodb mean-todo
+mongoose.connect('mongodb://localhost:27017/meantodo');        //Connecting to local mondodb meantodo
 
 app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users
 app.use(morgan('dev'));                                         // log every request to the console
@@ -29,7 +29,7 @@ app.get('/', function(req, res){
 
 //define todo Model  ===============================================================================
 
-var Todo = mongoose.model('Todo', {
+var Todo = mongoose.model('todo', {
 	text : String
 });
 
@@ -84,7 +84,7 @@ app.post('/api/todos', function(req, res){
 
 //Delete a todo
 
-app.delete('/api/todos/:todo_id', function(req, res){
+app.delete('/api/todos/:item_id', function(req, res){
 
 	Todo.remove({
 		_id : req.params.todo_id
