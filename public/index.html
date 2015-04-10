@@ -12,10 +12,13 @@
     <!-- SCROLLS -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
     <style>
-        html                    { overflow-y:scroll; }
-        body                    { padding-top:50px; }
-        #todo-list              { margin-bottom:30px; }
-        .done					{ text-decoration: line-through; color: #ccc}
+        html               { overflow-y:scroll; }
+        body               { padding-top:50px; }
+        #todo-list         { margin-bottom:30px; }
+        div.checkbox:hover { background: #ebebeb}
+        .done			   { text-decoration: line-through; color: #ccc}
+        .glyphicon         {float: right;}
+        .done .glyphicon   {color: #000;}
     </style>
 
     <!-- SPELLS -->
@@ -36,11 +39,12 @@
         <!-- TODO LIST -->
         <div id="todo-list" class="row">
             <div class="col-sm-4 col-sm-offset-4">
-
+                <button ng-click="viewAllTodos()">Show completed</button>
                 <!-- LOOP OVER THE TODOS IN $scope.todos -->
-                <div class="checkbox" ng-repeat="todo in todos"  todo-item>
+                <div todo-item class="checkbox" ng-repeat="todo in todos" ng-class="{done: todo.done == true}">
                     <label>
-                        <input type="checkbox" ng-click="deleteTodo(todo._id, $index)"> {{ todo.text }}
+                        <input type="checkbox" ng-click="completeTodo(todo._id, $index)" ng-disabled="todo.done">{{ todo.text }}
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="deleteTodo(todo._id, $index)"></span>
                     </label>
                 </div>
 

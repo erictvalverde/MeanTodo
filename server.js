@@ -30,7 +30,8 @@ app.get('/', function(req, res){
 //define todo Model  ===============================================================================
 
 var Todo = mongoose.model('Todo', {
-	text : String
+	text : String,
+	done : Boolean
 });
 
 
@@ -40,9 +41,23 @@ var Todo = mongoose.model('Todo', {
 //Get all todos
 
 app.get('/api/todos', function(req, res){
+	
+	//use mongoose to get all todos in the db {'done':false},
+	Todo.find({'done':false}, function(err, todos){
+		//if there is an error, nothing after err.send will excute
+		if(err)
+			res.send(err);
+		
+		//if suucess return all todos in json format
+		res.json(todos)
+	});
 
-	//use mongoose to get all todos in the db
-	Todo.find(function(err, todos){
+});//app.get
+
+app.get('/api/todos/:showAll', function(req, res){
+	
+	//use mongoose to get all todos in the db {'done':false},
+	Todo.find({}, function(err, todos){
 		//if there is an error, nothing after err.send will excute
 		if(err)
 			res.send(err);
@@ -81,6 +96,21 @@ app.post('/api/todos', function(req, res){
 
 });//app.post
 
+
+//Complete a todo
+
+app.post('/api/todos/complete:todo_id', function(req, res){
+
+	Todo.update({_id: req.params.todo_id}, {
+	    done : true
+	}, function(err, todo) {
+	   if(err)
+			res.send(err);
+
+		res.json(todo);
+	});
+
+});//app.update
 
 //Delete a todo
 
