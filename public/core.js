@@ -75,7 +75,7 @@ meanTodo.controller('mainController', ['$scope', '$http', function($scope, $http
 
 	$scope.viewAllTodos = function () {
 
-		$http.get('/api/todos/' + true)
+		$http.get('/api/todos/showAll')
 		.success(function(data){
 			$scope.todos = data;
 			$scope.todoNumber = data.length;

@@ -54,7 +54,7 @@ app.get('/api/todos', function(req, res){
 
 });//app.get
 
-app.get('/api/todos/:showAll', function(req, res){
+app.get('/api/todos/showAll', function(req, res){
 	
 	//use mongoose to get all todos in the db {'done':false},
 	Todo.find({}, function(err, todos){
